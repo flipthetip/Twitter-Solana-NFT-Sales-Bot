@@ -4,7 +4,7 @@
 
 [[Back to contents]](https://github.com/WilliamAmbrozic/Responsive-Solana-NFT-Sales-Bot#contents)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This bot allows for custom tweet text and fast response times. The bot utilizes MagicEden's ```GET/collections/:symbol/activities``` API call, responding to sales in less than a minute while allowing for NFT image uploading and metadata access through MagicEden's API. This bot is designed to run on an external server.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This bot allows for custom tweet text and fast response times. The bot utilizes MagicEden's ```GET/collections/:symbol/activities``` API call, responding to sales allowing for NFT image uploading and metadata access through MagicEden's API. This bot is designed to run on an external server.
 
 **Note: this bot was tested on an EC2 AWS instance and a [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)**. Usable on Windows/Unix based servers.
 
@@ -92,9 +92,9 @@ The config file **./config/config.json** will look something like this:
   "tweet_text": "BOOM💥 [-n] just sold for [-p] ([-f])",
   "fiat_currency": "USD",
   "TPS": 2,
-  "activities_per_call": 500
+  "refresh_delay": 0.01,
+  "activities_per_call": 1000
 }
-
 ```
 
 ### Optional Attributes
