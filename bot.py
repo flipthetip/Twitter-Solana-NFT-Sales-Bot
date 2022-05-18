@@ -5,6 +5,7 @@ import tweepy
 import yfinance as yf
 import os.path
 from os import path
+from collections import deque
 
 ######################### GLOBAL DEFINITIONS #########################################
 
@@ -19,6 +20,10 @@ supported_fiat = ["EUR", "USD", "CAD", "JPY", "GPB", "AUD", "CNY", "INR"]
 #If you feel risky lower this value or make it 0
 safety_delay = 0.05
 delay = (1/config['TPS']) + safety_delay
+refresh_delay = 1/config['refresh_delay']
+
+#Evicting queue of call size to help prevent double tweets
+tweeted_queue = deque(maxlen=config['activities_per_call'])
 
 client = tweepy.Client(bearer_token=config['twitter_credentials']['bearer_token'],
                        consumer_key=config['twitter_credentials']['consumer_key'],
@@ -46,6 +51,7 @@ def init_collections():
     for x in response:
         if x['type'] == 'buyNow':
             ret[x['signature']] = x
+
     return ret
 
 #Fetches the latest Solana price in selected currency
@@ -79,7 +85,11 @@ def send_tweet(api, client, sale_data, meta):
     with open('./tmp.png', 'wb') as handler:
         handler.write(image)
     mediaID = api.media_upload("tmp.png")
-    client.create_tweet(text=convert_tweet(sale_data, meta), media_ids=[mediaID.media_id])
+    try:
+        client.create_tweet(text=convert_tweet(sale_data, meta), media_ids=[mediaID.media_id])
+        tweeted_queue.append(sale_data['signature'])
+    except:
+        return
 
 ######################### DRIVER CODE #########################################
 
@@ -89,9 +99,6 @@ if config['fiat_currency'] not in supported_fiat:
 
 #Getting initial state of sales
 activities = init_collections()
-
-#Getting the last blocktime to ensure no repeat NFTs are tweeted
-last_blockTime =  list(activities.values())[0]['blockTime'] if len(activities) > 0 else 0
 last_activities = activities
 
 print(f"LISTENING FOR {config['ME_symbol'].upper()} SALES")
@@ -101,14 +108,14 @@ while True:
     #Getting hashmap
     try:
         activities = init_collections()
-        time.sleep(delay)
+        time.sleep(refresh_delay)
     except:
         continue
 
     #Checking all activities (by signature, key values)
     for activity in activities.keys():
         #Checking if there is a new activity with a larger blockTime
-        if activity not in last_activities.keys() and activities[activity]['blockTime'] >= last_blockTime:
+        if activity not in last_activities.keys() and activity not in tweeted_queue:
             try:
                 meta = get_meta_from_mint(activities[activity]['tokenMint'])
                 time.sleep(delay)
@@ -117,5 +124,4 @@ while True:
             except:
                 print(f"ERROR: with NFT that Sold for {str(activities[activity]['price'])} Not Tweeted")
 
-    last_blockTime =  list(activities.values())[0]['blockTime'] if len(activities) > 0 else 0
     last_activities = dict(activities)
