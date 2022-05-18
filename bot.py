@@ -56,7 +56,6 @@ def get_current_price(symbol):
 
 #Fetches metadata from mint address using the ME api
 def get_meta_from_mint(mint):
-    import requests
     url = "http://api-mainnet.magiceden.dev/v2/tokens/" + mint
     response = requests.request("GET", url, headers={}, data={})
     return response.json()
@@ -81,8 +80,6 @@ def send_tweet(api, client, sale_data, meta):
         handler.write(image)
     mediaID = api.media_upload("tmp.png")
     client.create_tweet(text=convert_tweet(sale_data, meta), media_ids=[mediaID.media_id])
-
-
 
 ######################### DRIVER CODE #########################################
 
