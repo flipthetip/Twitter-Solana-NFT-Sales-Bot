@@ -99,7 +99,7 @@ if config['fiat_currency'] not in supported_fiat:
 
 #Getting initial state of sales
 activities = init_collections()
-last_activities = activities
+last_activities = dict(activities)
 
 print(f"LISTENING FOR {config['ME_symbol'].upper()} SALES")
 
