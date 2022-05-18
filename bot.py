@@ -113,7 +113,7 @@ while True:
         continue
 
     #Checking all activities (by signature, key values)
-    for activity in activities.keys():
+    for activity in reversed(activities.keys()):
         #Checking if there is a new activity with a larger blockTime
         if activity not in last_activities.keys() and activity not in tweeted_queue:
             try:
