@@ -6,8 +6,6 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This bot allows for custom tweet text and fast response times. The bot utilizes MagicEden's ```GET/collections/:symbol/activities``` API call, responding to sales allowing for NFT image uploading and metadata access through MagicEden's API. This bot is designed to run on an external server.
 
-The ```GET/collections/:symbol/activities``` API call as of writing updates data approximately every 10 minutes. The default wait time for this bot has been updated accordingly to check for updates every 100 seconds. As a result NFT sales will have delays up to however long MagicEden takes to update their activities data + 1:30 minutes (around 10 minutes as of writing). We do not want to call irresponsibly to the API.
-
 **Note: this bot was tested on an EC2 AWS instance and a [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)**. Usable on Windows/Unix based servers.
 
 ## Contents
