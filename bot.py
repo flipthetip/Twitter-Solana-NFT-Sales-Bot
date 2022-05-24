@@ -84,6 +84,7 @@ def send_tweet(api, client, sale_data, meta):
     image = requests.get(meta['image']).content
     with open('./tmp.png', 'wb') as handler:
         handler.write(image)
+    #compress here
     mediaID = api.media_upload("tmp.png")
     try:
         client.create_tweet(text=convert_tweet(sale_data, meta), media_ids=[mediaID.media_id])
