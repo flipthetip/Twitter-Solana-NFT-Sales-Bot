@@ -7,6 +7,8 @@
     "access_token": "ADD_YOURS_HERE",
     "access_token_secret": "ADD_YOURS_HERE"
   },
+  "attr_filters": [
+  ],
   "tweet_text": "BOOM💥 [-n] just sold for [-p] ([-f])",
   "fiat_currency": "USD",
   "TPS": 2,

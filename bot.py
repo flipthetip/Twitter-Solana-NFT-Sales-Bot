@@ -92,6 +92,13 @@ def send_tweet(api, client, sale_data, meta):
     except:
         return
 
+def filter_attr(meta):
+    if len(config["attr_filters"]) == 0: return True
+    for attr in config["attr_filters"]:
+        if attr not in meta['attributes']:
+            return False
+    return True
+
 ######################### DRIVER CODE #########################################
 
 #Checking valid currency
@@ -102,7 +109,12 @@ if config['fiat_currency'] not in supported_fiat:
 activities = init_collections()
 last_activities = dict(activities)
 
-print(f"LISTENING FOR {config['ME_symbol'].upper()} SALES")
+if len(config["attr_filters"]) == 0:
+    print(f"LISTENING FOR {config['ME_symbol'].upper()} SALES")
+else:
+    print(f"LISTENING FOR {config['ME_symbol'].upper()} SALES WITH: ")
+    for attr in config["attr_filters"]:
+        print(f"    * {attr}")
 
 #Bot loop
 while True:
@@ -120,8 +132,9 @@ while True:
             try:
                 meta = get_meta_from_mint(activities[activity]['tokenMint'])
                 time.sleep(delay)
-                send_tweet(api, client, activities[activity], meta)
-                print(f"Tweeting: {convert_tweet(activities[activity], meta)}")
+                if filter_attr(meta):
+                    send_tweet(api, client, activities[activity], meta)
+                    print(f"Tweeting: {convert_tweet(activities[activity], meta)}")
             except:
                 print(f"ERROR: with NFT that Sold for {str(activities[activity]['price'])} Not Tweeted")
 
