@@ -132,7 +132,6 @@ BOOM💥 SolGod #001 just sold for 50.24 SOL ($5000.37 USD)
 - [Twitter](https://twitter.com/WilliamAmbrozic)
 
 ## Solana Tip Jar
-  * wia.sol 
   * 8vU6RfyFDk9WriVgaJohBxqtE86TLtjAR8cPWjdU6zEN
 ### Bitcoin
   * bc1qa7vkam2w4cgw8njqx976ga5ns8egsq3yzxzlrt
