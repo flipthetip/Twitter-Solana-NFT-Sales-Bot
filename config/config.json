@@ -1,13 +1,13 @@
 {
-  "ME_symbol": "ADD_YOUR_SYMBOL_HERE",
+  "ME_symbol": "tshc",
   "twitter_credentials": {
-    "bearer_token": "ADD_YOURS_HERE",
-    "consumer_key": "ADD_YOURS_HERE",
-    "consumer_secret": "ADD_YOURS_HERE",
-    "access_token": "ADD_YOURS_HERE",
-    "access_token_secret": "ADD_YOURS_HERE"
+    "bearer_token": "AAAAAAAAAAAAAAAAAAAAAIF7dwEAAAAAHXYds4xae28AOfKFQocIKzYKUBE%3DFwRixBPnLTXYpqrUF7skjS9EuDt8hTtLyKlhAgFQZwRIhnKBFS",
+    "consumer_key": "WIGq6MbjRHilmbLU0bYvnUjeS",
+    "consumer_secret": "pEwRBOz7PK0v7EzeepwpbfL9wm7WxYTfeaGUQaB21vW7AiIHgo",
+    "access_token": "1496585365033197568-2NoK5uK9Skj88Tmy99eQvCV84j9pl5",
+    "access_token_secret": "vwrraSRQT6ow1y1Dl4AvfPWHwDdE1MtXpSKeKbUdtrbbb"
   },
-  "tweet_text": "BOOM💥 [-n] just sold for [-p] ([-f])",
+  "tweet_text": "[-n] just sold for [-p] ([-f]) #stayshady",
   "fiat_currency": "USD",
   "TPS": 2,
   "refresh_delay": 0.5,
